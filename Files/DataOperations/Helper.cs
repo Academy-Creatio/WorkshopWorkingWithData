@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -48,7 +49,9 @@ namespace WorkshopWorkingWithData.Files.DataOperations
 
             while (i.MoveNext())
             {
-                if (entities[0].TryGetPropertyValue(i.Current, out object columnValue))
+                object columnValue = entities[0].GetColumnValue(i.Current);
+
+                if (columnNames != null)
                 {
                     DataColumn dc = new DataColumn(i.Current, columnValue.GetType());
                     dt.Columns.Add(dc);
@@ -59,13 +62,19 @@ namespace WorkshopWorkingWithData.Files.DataOperations
                 DataRow row = dt.NewRow();
                 foreach (DataColumn dc in dt.Columns)
                 {
-                    if (entity.TryGetPropertyValue(dc.ColumnName, out object columnValue))
+
+                    object columnValue = entity.GetColumnValue(dc.ColumnName);
+
+                    if (columnValue != null)
                     {
                         try
                         {
                             row[dc.ColumnName] = columnValue;
                         }
-                        catch { };
+                        catch(Exception e) 
+                        {
+                            //Sorry
+                        };
                     }
                 }
                 dt.Rows.Add(row);
@@ -74,6 +83,7 @@ namespace WorkshopWorkingWithData.Files.DataOperations
         }
         private static string GetRQueryHtmlComponent(string query, string title)
         {
+            if (string.IsNullOrEmpty(query)) return "";
 
             const string blockquote = "<blockquote class=\"blockquote\">";
             StringBuilder sb = new StringBuilder();
@@ -123,6 +133,10 @@ namespace WorkshopWorkingWithData.Files.DataOperations
     {
         SELECT = 0,
         ESQ = 1,
-        CustomQuery = 2
+        CustomQuery = 2,
+        UPDATE = 3,
+        INSERT = 4,
+        DELETE = 5
+
     }
 }

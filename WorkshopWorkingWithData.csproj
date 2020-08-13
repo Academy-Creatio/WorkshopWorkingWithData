@@ -121,7 +121,13 @@
   <ItemGroup>
     <Compile Include="Files\DataOperations\AddingData.cs" />
     <Compile Include="Files\DataOperations\Helper.cs" />
+    <Compile Include="Files\DataOperations\InsertingData.cs" />
     <Compile Include="Files\DataOperations\ReadingData.cs" />
+    <Compile Include="Files\DataOperations\DeletingData.cs" />
+    <Compile Include="Files\DataOperations\UpdatingData.cs" />
+    <Compile Include="Files\EventListener\ActivityEventListener.cs" />
+    <Compile Include="Files\EventListener\Extensions.cs" />
+    <Compile Include="Files\WebServices\MsgChannelUtilities.cs" />
     <Compile Include="Files\WebServices\WorkshopWebService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -17,10 +17,16 @@ namespace WorkshopWorkingWithData
     public class WorkshopWebService : BaseService
     {
         private ReadingData ReadingData { get; set; }
+        private UpdatingData UpdatingData { get; set; }
+        private InsertingData InsertingData { get; set; }
+        private DeletingData DeletingData { get; set; }
         private Stopwatch Timer { get; set;}
         public WorkshopWebService()
         {
             ReadingData = new ReadingData(UserConnection ?? SystemUserConnection);
+            UpdatingData = new UpdatingData(UserConnection ?? SystemUserConnection);
+            InsertingData = new InsertingData(UserConnection ?? SystemUserConnection);
+            DeletingData = new DeletingData(UserConnection ?? SystemUserConnection);
             Timer = new Stopwatch();
         }
 
@@ -35,7 +41,7 @@ namespace WorkshopWorkingWithData
         }
         #endregion
 
-        #region Methods : REST
+        #region Methods : SELECT
         [OperationContract]
         [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Xml)]
         public Stream GetAllContacts(QuryType qt)
@@ -91,6 +97,144 @@ namespace WorkshopWorkingWithData
             string htmlPage = result.Item1.GetHtmlPage(Timer.ElapsedTicks, result.Item2, qt.ToString());
             return GetMemoryStream(htmlPage);
         }
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Xml)]
+        public Stream GetAllDataReverseJoin(QuryType qt)
+        {
+        // This is simple example of EntitySchemaQuery and use of reverse join expressions
+        // Example to run: 
+        // http://localhost:6090/0/rest/WorkshopWebService/GetAllDataReverseJoin?qt=1
+            Timer.Start();
+            Tuple<DataTable, string> result;
+            switch (qt)
+            {
+                case QuryType.SELECT:
+                    result = ReadingData.GetAllDataReverseJoinSelect();
+                    break;
+                case QuryType.ESQ:
+                    result = ReadingData.GetAllDataReverseJoinEsq();
+                    break;
+                case QuryType.CustomQuery:
+                    result = ReadingData.GetAllContactsCustomQuery();
+                    break;
+                default:
+                    result = ReadingData.GetAllDataReverseJoinEsq();
+                    break;
+            }
+            Timer.Stop();
+
+            string htmlPage = result.Item1.GetHtmlPage(Timer.ElapsedTicks, result.Item2, qt.ToString());
+            return GetMemoryStream(htmlPage);
+        }
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Xml)]
+        public Stream GetContactsWithMinutes(QuryType qt, Guid ContactId)
+        {
+            // http://localhost:6090/0/rest/WorkshopWebService/GetContactsWithMinutes?qt=1&ContactId=410006e1-ca4e-4502-a9ec-e54d922d2c00
+            Timer.Start();
+            Tuple<DataTable, string> result;
+            switch (qt)
+            {
+                case QuryType.SELECT:
+                    result = ReadingData.GetContactsWithMinutesSelect(ContactId);
+                    break;
+                case QuryType.ESQ:
+                    result = ReadingData.GetContactsWithMinutesEsq(ContactId);
+                    break;
+                case QuryType.CustomQuery:
+                    result = ReadingData.GetAllContactsCustomQuery();
+                    break;
+                default:
+                    result = ReadingData.GetAllDataReverseJoinEsq();
+                    break;
+            }
+            Timer.Stop();
+
+            string htmlPage = result.Item1.GetHtmlPage(Timer.ElapsedTicks, result.Item2, qt.ToString());
+            return GetMemoryStream(htmlPage);
+        }
+
+        #endregion
+
+        #region Methods : UPDATE
+        [OperationContract]
+        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public string UpdateContactName(QuryType qt, Guid ContactId, string NewName)
+        {
+            // http://localhost:6090/0/rest/WorkshopWebService/UpdateContactName?qt=1&ContactId=410006e1-ca4e-4502-a9ec-e54d922d2c00&NewName=Kirill
+            Timer.Start();
+            string result = string.Empty;
+            switch (qt)
+            {
+                case QuryType.UPDATE:
+                    result = UpdatingData.UpdateContactUpdate(ContactId, NewName);
+                    break;
+                case QuryType.ESQ:
+                    result = UpdatingData.UpdateContactEsq(ContactId, NewName);
+                    break;
+                default:
+                    result = UpdatingData.UpdateContactEsq(ContactId, NewName);
+                    break;
+            }
+            Timer.Stop();
+
+            return result;
+        }
+        #endregion
+
+        #region INSERT
+        [OperationContract]
+        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public string InsertSeveralContacts(QuryType qt)
+        {
+            // http://localhost:6090/0/rest/WorkshopWebService/InsertSeveralContacts?qt=1
+            Timer.Start();
+            string result = string.Empty;
+            switch (qt)
+            {
+                case QuryType.INSERT:
+                    result = InsertingData.InsertSeveralContacts();
+                    break;
+                case QuryType.ESQ:
+                    result = InsertingData.InsertSeveralContactsEsq();
+                    break;
+                default:
+                    result = InsertingData.InsertSeveralContacts();
+                    break;
+            }
+            Timer.Stop();
+
+            return result;
+        }
+        #endregion
+
+        #region DELETE
+        [OperationContract]
+        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public string DeleteContact(QuryType qt, Guid ContactId)
+        {
+            // http://localhost:6090/0/rest/WorkshopWebService/DeleteContact?qt=1&ContactId=060b93d0-0b94-4967-af32-030ac0844ec9
+            Timer.Start();
+            string result = string.Empty;
+            switch (qt)
+            {
+                case QuryType.INSERT:
+                    result = DeletingData.DeleteContact(ContactId);
+                    break;
+                case QuryType.ESQ:
+                    result = DeletingData.DeleteContactEsq(ContactId);
+                    break;
+                default:
+                    result = DeletingData.DeleteContactEsq(ContactId);
+                    break;
+            }
+            Timer.Stop();
+
+            return result;
+        }
+
         #endregion
 
         #region Methods : Private
