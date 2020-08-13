@@ -184,7 +184,7 @@ namespace WorkshopWorkingWithData
         }
         #endregion
 
-        #region INSERT
+        #region Methods: INSERT
         [OperationContract]
         [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public string InsertSeveralContacts(QuryType qt)
@@ -210,7 +210,7 @@ namespace WorkshopWorkingWithData
         }
         #endregion
 
-        #region DELETE
+        #region Methods: DELETE
         [OperationContract]
         [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public string DeleteContact(QuryType qt, Guid ContactId)

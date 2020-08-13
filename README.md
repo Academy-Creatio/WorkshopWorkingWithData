@@ -25,41 +25,32 @@
 </details>
 
 <details>
-    <summary>Working with transient data</summary>
+    <summary>Working with data API</summary>
 
-- Working with transient data
+- DataService
+- OData
 </details>
 
+## FEEDBACK
+Thank you for having taken development training with me. In order to make this class better, please offer your feedback through [feedback form][FeedBackForm].It is very important for me to know where and how I can improve.
 
-<!--
+## VIDEO RECORDING
 
-## Exercises
+| Day      | Play Link      | Download Link     | Chat File    |
+|:--------:|:--------------:|:-----------------:|:------------:|
+| Day 1    | [Play][Day1P]  |[Download][Day1D]  | [Chat][Day1C]|
 
-|**Exercise**|**Lang**|**Description**|**Duration**|
-|:----------:|:------:|:--------------|:----------:|
-|1|C#|Create [Project Package][nProjectPackage] with [command-line interface utility (clio)][nclio] tool|10 min|
-|2|C#|Build [configuration service][nConfWebService] to perform basic operations with the help of ESQ, Query and CustomQuery| 30 min|
-|3|C#|Aggregate Functions| 20 min|
-|4|C#|Build Activity [Entity Event Listener][nEEL] to detect overlapping activities for a user| 20 min|
-|5|C#|Create Views| 20 min|
-|6|C#|Description| 20 min|
-|7|JS|ESQ| 20 min|
-|8|JS|Virtual fieds| 10 min|
-|10||DataService|30 min|
-|11||OData      | 10 min|
-|12||Creatio.DataServise NuGet | 10 min|
-|13| | Wrap Up, Q&A, recommendations for future sessions| 20 min|
-|**Total**||| **240 min**|
-
--->
 
 ## Academy Articles
+- [CRUD Operations][crud]
 - [Entity Event Layer][nEEL]  
 - [Configuration Web Service][nConfWebService]  
 - [Working with DataBase][nWWDB]  
 - [Project Package][nProjectPackage]
-
-
+- [Postman Collection][postManCollection]
+- [Data Service][DataService]
+- [oData Version 3][oData3]
+- [oData Version 4][oData4]
 
 
 
@@ -71,3 +62,14 @@
 [nCLio]: https://github.com/Advance-Technologies-Foundation/clio
 [GitHubProfile]: https://github.com/kirillkrylov
 [email]: mailto:k.krylov@creatio.com
+[oData3]: https://academy.creatio.com/documents/technic-sdk/7-16/creatio-integration-odata-3-protocol
+[oData4]: https://academy.creatio.com/documents/technic-sdk/7-16/creatio-integration-odata-4-protocol
+[DataService]: https://academy.creatio.com/documents/technic-sdk/7-16/dataservice
+[postManCollection]: https://documenter.getpostman.com/view/10204500/SztHX5Qb?version=latest
+[crud]: https://academy.creatio.com/documents/technic-sdk/7-16/crud-operations
+
+
+[FeedBackForm]: https://forms.office.com/Pages/ResponsePage.aspx?id=-6Jce0OmhUOLOTaTQnDHFnkM2IfFz_ZAiv6yi86uCspUMk1QN0xVVERMMkg4MVZNRjBHWUpES0pDUSQlQCN0PWcu
+[Day1P]: https://us02web.zoom.us/rec/play/vJx7cuugqTw3SdGc5ASDUfB7W9Tvf_6shnMYq_UNmRu9U3cDO1T3YLoTZLG95sMGcmYv4pQ8HBksZKj2
+[Day1D]: https://us02web.zoom.us/rec/download/vJx7cuugqTw3SdGc5ASDUfB7W9Tvf_6shnMYq_UNmRu9U3cDO1T3YLoTZLG95sMGcmYv4pQ8HBksZKj2
+[Day1C]: https://us02web.zoom.us/rec/download/6cErJOD8rD03GoaXtASDAPYqW9TrfK2s0iJKrvYJxUvnWyYEMQWuYLtGZ-ubF27hibO7vGXA-HRn7K2j
