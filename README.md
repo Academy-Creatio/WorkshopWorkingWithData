@@ -34,12 +34,6 @@
 ## FEEDBACK
 Thank you for having taken development training with me. In order to make this class better, please offer your feedback through [feedback form][FeedBackForm].It is very important for me to know where and how I can improve.
 
-## VIDEO RECORDING
-
-| Day      | Play Link      | Download Link     | Chat File    |
-|:--------:|:--------------:|:-----------------:|:------------:|
-| Day 1    | [Play][Day1P]  |[Download][Day1D]  | [Chat][Day1C]|
-
 
 ## Academy Articles
 - [CRUD Operations][crud]
