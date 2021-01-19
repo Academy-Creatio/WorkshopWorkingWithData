@@ -31,9 +31,6 @@
 - OData
 </details>
 
-## FEEDBACK
-Thank you for having taken development training with me. In order to make this class better, please offer your feedback through [feedback form][FeedBackForm].It is very important for me to know where and how I can improve.
-
 
 ## Academy Articles
 - [CRUD Operations][crud]
