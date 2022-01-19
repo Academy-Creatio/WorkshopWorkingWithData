@@ -34,8 +34,20 @@ namespace WorkshopWorkingWithData.Files.DataOperations
         }
         internal Tuple<DataTable, string> GetAllContactsCustomQuery()
         {
+            CustomQuery custom;
+            if(UserConnection.DBEngine.DBEngineType == DBEngineType.MSSql)
+			{
+                custom = new CustomQuery(UserConnection, "Select Id, Name, Phone, Email from Contact");
+			} 
+            else if(UserConnection.DBEngine.DBEngineType == DBEngineType.PostgreSql)
+			{
+                custom= new CustomQuery(UserConnection, "Select \"Id\", \"Name\", \"Phone\", \"Email\" from public.\"Contact\"");
+			}
+			else
+			{
+                throw new NotImplementedException("Oracle is not supported in this package");
+			}
 
-            CustomQuery custom = new CustomQuery(UserConnection, "Select Id, Name, Phone, Email from Contact");
 
             DataTable dt;
 
@@ -117,10 +129,25 @@ namespace WorkshopWorkingWithData.Files.DataOperations
         }
         internal Tuple<DataTable, string> GetFilteredContactsCustomQuery(string email)
         {
-        CustomQuery custom = new CustomQuery(UserConnection, $@"
-            Select Id, Name, Phone, Email 
-            from Contact
-            where Email ='{email}'");
+            CustomQuery custom;
+            if (UserConnection.DBEngine.DBEngineType == DBEngineType.MSSql)
+            {
+                custom = new CustomQuery(UserConnection, $@"
+                    Select Id, Name, Phone, Email 
+                    from Contact
+                    where Email ='{email}'");
+            }
+            else if (UserConnection.DBEngine.DBEngineType == DBEngineType.PostgreSql)
+			{
+                custom = new CustomQuery(UserConnection, $"" +
+                    $"Select \"Id\", \"Name\", \"Phone\", \"Email\" " +
+                    $"from public.\"Contact\" " +
+                    $"where public.\"Email\" ='{email}'");
+            }
+            else
+            {
+                throw new NotImplementedException("Oracle is not supported in this package");
+            }
 
             DataTable dt;
 

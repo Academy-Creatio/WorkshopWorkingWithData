@@ -1,7 +1,5 @@
 ﻿using System;
-using Terrasoft.Common;
 using Terrasoft.Core;
-
 using Terrasoft.Core.DB;
 using Terrasoft.Core.Entities;
 using Terrasoft.Core.Entities.Events;
@@ -9,8 +7,7 @@ using WorkshopWorkingWithData.Files.WebServices;
 
 namespace WorkshopWorkingWithData.Files.EventListener
 {
-
-    [EntityEventListener(SchemaName = "Activity")]
+	[EntityEventListener(SchemaName = "Activity")]
     class ActivityEventListener : BaseEntityEventListener
     {
         private static readonly Guid activityType = Guid.Parse("FBE0ACDC-CFC0-DF11-B00F-001D60E938C6");//Task
